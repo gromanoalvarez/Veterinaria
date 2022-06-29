@@ -79,18 +79,24 @@ public class TestVeterinaria {
 		Integer idDuenio = 111, idMascota = 1;
 		Double precioAtencion = 120.33;
 		Duenio duenio = new Duenio(idDuenio, "Rogelio");
-		veterinaria.agregarDuenioMascotas(duenio);
+		
 		
 		Mascota mascota1 = new Mascota("Petaca", idMascota, "Peta", TipoDeMascota.DOMESTICA);
-		duenio.agregarMascota(mascota1);
+		
 		try {
+			
+			veterinaria.agregarDuenioMascotas(duenio);
+			duenio.agregarMascota(mascota1);
 			veterinaria.iniciarAtencion(idDuenio, idMascota, precioAtencion);
 		} catch (DuenioInexistenteException e) {
 			System.err.println(e);
 
 		} catch (MascotaNoEncontradaException e) {
 			System.err.println(e);
+		}catch(MascotaDuplicada e) {
+			System.err.println(e);
 		}
+	
 		assertEquals(1, veterinaria.getAtenciones().size());
 		System.out.println(veterinaria.getAtenciones().size());
 		}
